@@ -1,4 +1,4 @@
-FROM php:7.2.3-apache-stretch
+FROM php:7.1.12-apache-jessie
 
 RUN apt-get update
 
