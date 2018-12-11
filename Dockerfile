@@ -4,14 +4,11 @@ ENV APACHE_DOCUMENT_ROOT ${APACHE_DOCUMENT_ROOT:-/var/www/html/public}
 
 RUN apt update
 
-# Required for zip; php zip extension; png; node; vim; gd; gd; php intl extension; cron
-RUN apt install -y zip zlib1g-dev libpng-dev gnupg vim libfreetype6-dev libjpeg62-turbo-dev libicu-dev cron
+# Required for zip; php zip extension; png; node; vim; gd; gd; cron
+RUN apt install -y zip zlib1g-dev libpng-dev gnupg vim libfreetype6-dev libjpeg62-turbo-dev cron
 
-# Configure php Intl extension
-RUN docker-php-ext-configure intl
-
-# PHP extensions - pdo-mysql; zip (used to download packages with Composer); mbstring; intl;
-RUN docker-php-ext-install pdo_mysql zip mbstring intl
+# PHP extensions - pdo-mysql; zip (used to download packages with Composer); mbstring;
+RUN docker-php-ext-install pdo_mysql zip mbstring
 
 # GD (Image library)
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
